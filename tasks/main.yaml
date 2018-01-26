@@ -1,12 +1,9 @@
 ---
-- hosts: all
-  become: yes
-  remote_user: root # If you are a sudoer without access to root, put your username here!
-  handlers:
-    - import_tasks: handlers/main.yml
-  tasks:
-  - include_vars: dir=defaults
-  - import_tasks: tasks/nginx.yaml
+  - include_tasks: nginx.yaml
+
+  - fail:
+      msg: "Aborted"
+
   - name: Add non-standard repositories
     apt_repository:
       repo: "{{ item }}"
@@ -15,6 +12,7 @@
       - deb http://ftp.debian.org/debian jessie-backports main
       - deb https://matrix.org/packages/debian/ jessie main
       - deb-src https://matrix.org/packages/debian/ jessie main
+
   - name: Add apt-key for jessie-backports
     apt_key:
       keyserver: pgpkeys.mit.edu
@@ -22,11 +20,12 @@
     with_items:
       - 8B48AD6246925553
       - 7638D0442B90D010
+
   - name: Add an apt signing key
     apt_key:
       url: https://matrix.org/packages/debian/repo-key.asc
       state: present
-  - include_tasks: tasks/apt_upgrade.yml
+  - include_tasks: apt_upgrade.yml
 
   - name: Install requirements
     apt:
@@ -38,6 +37,7 @@
       - curl
       - python
       - python-pip
+
   - name: Install requirements from jessie-backports
     apt:
       name: "{{ item }}"
@@ -55,10 +55,12 @@
       vtype: "{{ item.vtype }}"
     with_items:
       - {question: 'matrix-synapse/report-stats',value: '{{ matrix_synapse_report_stats }}',vtype: 'boolean' }
-      - {question: 'matrix-synapse/server-name',value: '{{ matrix_synapse_hostname }}',vtype: 'string' }
+      - {question: 'matrix-synapse/server-name',value: '{{ matrix_synapse_domain }}',vtype: 'string' }
 
   - name: Install matrix-synapse
-    apt: pkg=matrix-synapse state=present
+    apt:
+      name: matrix-synapse
+      state: present
     notify: restart matrix-synapse
 
   - name: Set Synapse Cache Factor

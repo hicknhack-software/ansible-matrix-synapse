@@ -1,36 +1,28 @@
 ---
   - name: Install Nginx
     apt: pkg=nginx state=present
+  
+  - name: Configure Nginx
   - name: Copy nginx.conf to server
-    copy:
-      src: "{{ matrix_synapse_nginx_config_file }}"
-      dest: "/etc/nginx/sites-available/{{ matrix_synapse_hostname }}"
+    template:
+      src: "nginx.conf.j2"
+      dest: "/etc/nginx/sites-available/{{ matrix_synapse_domain }}"
     notify:
       - restart nginx
-  - name: Changes in nginx.conf
-    lineinfile:
-      path: /etc/nginx/sites-available/{{ matrix_synapse_hostname }}
-      regexp: "{{ item.regexp }}"
-      state: present
-      line: "{{ item.line }}"
-    with_items:
-      - {regexp: 'server_name my.site.com;', line: '    server_name {{ matrix_synapse_hostname }};'}
-      - {regexp: 'ssl_certificate     /etc/letsencrypt/live/my.site.com/fullchain.pem;', line: '    ssl_certificate     /etc/letsencrypt/live/{{ matrix_synapse_hostname }}/fullchain.pem;'}
-      - {regexp: 'ssl_certificate_key /etc/letsencrypt/live/my.site.com/privkey.pem;', line: '    ssl_certificate_key /etc/letsencrypt/live/{{ matrix_synapse_hostname }}/privkey.pem;'}
-      - {regexp: 'listen 443 ssl;', line: '    listen {{ matrix_synapse_riot_port }} ssl;'}
-    notify:
-      - restart nginx
+  
   - name: Clean sites-enabled/
     file:
       state: absent
       path: "/etc/nginx/sites-enabled/{{ item }}"
     with_items:
-      - "{{ matrix_synapse_hostname }}"
+      - "{{ matrix_synapse_domain }}"
       - default
+  
   - name: Link sites-available to sites-enabled
     file:
-      src: "/etc/nginx/sites-available/{{ matrix_synapse_hostname }}"
-      dest: "/etc/nginx/sites-enabled/{{ matrix_synapse_hostname }}"
+      src: "/etc/nginx/sites-available/{{ matrix_synapse_domain }}"
+      dest: "/etc/nginx/sites-enabled/{{ matrix_synapse_domain }}"
       state: link
     notify: restart nginx
-  - import_tasks: certs.yml
+  
+  #- import_tasks: certs.yml
