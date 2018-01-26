@@ -12,7 +12,7 @@
       - python-certbot-nginx
   - name: Get CA certificates
     become: yes
-    shell: 'certbot certonly --standalone --installer nginx --email "{{ email }}" --domain "{{ hostname }}" --pre-hook "service nginx stop" --agree-tos --post-hook "service nginx start" --quiet --non-interactive'
+    shell: 'certbot certonly --standalone --installer nginx --email "{{ matrix_synapse_email }}" --domain "{{ matrix_synapse_hostname }}" --pre-hook "service nginx stop" --agree-tos --post-hook "service nginx start" --quiet --non-interactive'
   - name: cronjob to renew certificates
     become: yes
     cron:

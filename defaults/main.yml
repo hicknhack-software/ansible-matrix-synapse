@@ -1,10 +1,10 @@
 ---
 # Change these before running ansible playbook
-    reportStats: false # Send anonymus stats report to help improve matrix code, VISIT: matrix.org
-    hostname: vagrant.box # The domain of server where you plan to set homeserver. (Eg: www.MY_AWESOME_WEBSITE.com)
-    email: YOUR.AWESOME_EMAIL.ID # Certbot requires an email ID. (For getting certificates and making a https connection)
+    matrix_synapse_report_stats: false # Send anonymus stats report to help improve matrix code, VISIT: matrix.org
+    matrix_synapse_hostname: vagrant.box # The domain of server where you plan to set homeserver. (Eg: www.MY_AWESOME_WEBSITE.com)
+    matrix_synapse_email: YOUR.AWESOME_EMAIL.ID # Certbot requires an email ID. (For getting certificates and making a https connection)
 # Change these only if you are sure of what's going on here.
-    matrixConfFileToSend: files/nginx.conf # This is the nginx.conf file that would be send to the server
-    SynapseCacheFactor: 0.2 # Read about it here: https://github.com/matrix-org/synapse#help-synapse-eats-all-my-ram
-    enableRegistration: true # Set to `true` if you plan to allow users to register themselves using riot.im like clients, Set `false` otherwise.
-    portForRiot: 443 # You'll hit this port on your domain for your homeserver
+    matrix_synapse_config_file_to_send: files/nginx.conf # This is the nginx.conf file that would be send to the server
+    matrix_synapse_cache_factor: 0.2 # Read about it here: https://github.com/matrix-org/synapse#help-synapse-eats-all-my-ram
+    matrix_synapse_enable_registration: true # Set to `true` if you plan to allow users to register themselves using riot.im like clients, Set `false` otherwise.r
+    matrix_synapse_riot_port: 443 # You'll hit this port on your domain for your homeserver

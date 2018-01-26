@@ -10,19 +10,19 @@ This code will install matrix-synapse on your server & get an certificates from 
 
 **Be mindful you need to set the variables before running the script; the variables are to be set in the defaults/main.yml file**
  - Send anonymus stats report to help improve matrix code, VISIT: matrix.org
-     - reportStats: true/false
+     - matrix_synapse_report_stats: true/false
  - The domain of server where you plan to set homeserver. (Eg: www.MY_AWESOME_WEBSITE.com)
-     - hostname: vagrant.box
- - Email is required if you plan to use letsencrypt for https (secure) connection.
-     - email: YOUR_AWESOME@EMAIL.ID
+     - matrix_synapse_hostname: vagrant.box
+ - matrix_synapse_email is required if you plan to use letsencrypt for https (secure) connection.
+     - matrix_synapse_email: YOUR_AWESOME@EMAIL.ID
  - This is the nginx configuration file that would be send to the server
-     - matrixConfFileToSend: PATH/TO/NGINX_CONF_FILE
+     - matrix_synapse_nginx_config_file: PATH/TO/NGINX_CONF_FILE
  - Amount of RAM matrix-synapse is allowed to use, Read more at https://github.com/matrix-org/synapse#help-synapse-eats-all-my-ram
-     - SynapseCacheFactor: INTEGER
+     - matrix_synapse_cache_factor: INTEGER
  - Set to `true` if you plan to allow users to register themselves using riot.im like clients, Set `false` otherwise.
-     - enableRegistration: true/false
+     - matrix_synapse_enable_registration: true/false
  - You'll hit this port on your domain for your homeserver
-     - portForRiot: NUMBER [Valid port number]
+     - matrix_synapse_riot_port: NUMBER [Valid port number]
 
 **How to run:**
   1. Install Ansible
