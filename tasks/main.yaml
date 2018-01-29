@@ -1,9 +1,6 @@
 ---
   - include: nginx.yaml
 
-  - fail:
-      msg: "Aborted"
-
   - name: Add non-standard repositories
     apt_repository:
       repo: "{{ item }}"
