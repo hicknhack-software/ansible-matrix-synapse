@@ -1,5 +1,5 @@
 ---
-  - include_tasks: nginx.yaml
+  - include: nginx.yaml
 
   - fail:
       msg: "Aborted"
@@ -25,7 +25,7 @@
     apt_key:
       url: https://matrix.org/packages/debian/repo-key.asc
       state: present
-  - include_tasks: apt_upgrade.yml
+  - include: apt_upgrade.yml
 
   - name: Install requirements
     apt:
