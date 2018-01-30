@@ -7,8 +7,8 @@ server {
     root /var/www/html;
     index index.html index.htm index.nginx-debian.html;
      
-    ssl_certificate     /etc/letsencrypt/live/{{ matrix_synapse_domain }}/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/{{ matrix_synapse_domain }}/privkey.pem;
+    # ssl_certificate     /etc/letsencrypt/live/{{ matrix_synapse_domain }}/fullchain.pem;
+    # ssl_certificate_key /etc/letsencrypt/live/{{ matrix_synapse_domain }}/privkey.pem;
     ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
     ssl_ciphers         HIGH:!aNULL:!MD5;
     error_page 497  https://$host:$server_port$request_uri;
