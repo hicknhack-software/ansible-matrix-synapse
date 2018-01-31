@@ -1,7 +1,4 @@
 ---
-  # do not include nginx since we sit behin a reverse proxy already so no need for double duty
-  # - include: nginx.yaml 
-
   - name: Add non-standard repositories
     apt_repository:
       repo: "{{ item }}"
