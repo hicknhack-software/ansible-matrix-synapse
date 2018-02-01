@@ -1,0 +1,24 @@
+---
+- name: Install PostgreSQL
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - postgresql
+    - libpq-dev
+    - python-psycopg2
+
+- name: Create Database User Role
+  postgresql_user:
+    name: "{{ matrix_synapse_database_user }}"
+    password: "{{ matrix_synapse_database_password }}"
+
+
+- name: Create Database Tables
+  postgresql_db:
+    name: "{{ matrix_synapse_database_name }}"
+    encoding: UTF-8
+    lc_collate: C
+    lc_ctype: C
+    template: template0
+    owner: "{{ matrix_synapse_database_user }}"
