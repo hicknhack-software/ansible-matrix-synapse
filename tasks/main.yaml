@@ -42,16 +42,6 @@
       - python-cffi
       - certbot
 
-  - name: Set Debconf values for matrix-synapse
-    debconf:
-      name: matrix-synapse
-      question: "{{item.question}}"
-      value: "{{ item.value }}"
-      vtype: "{{ item.vtype }}"
-    with_items:
-      - {question: 'matrix-synapse/report-stats',value: '{{ matrix_synapse_report_stats }}',vtype: 'boolean' }
-      - {question: 'matrix-synapse/server-name',value: '{{ matrix_synapse_domain }}',vtype: 'string' }
-
   - name: Install matrix-synapse
     apt:
       name: matrix-synapse
@@ -67,19 +57,5 @@
     notify: restart matrix-synapse
 
   - include: postgresql.yml
-    when: matrix_synapse_database == "postgresql"
-
-  - name: Set Database
-    template:
-      src: "database.yml.j2"
-      dest: "{{ matrix_synapse_config_dir }}/database.yaml"
-    notify: restart matrix-synapse
-    when: matrix_synapse_database == "postgresql"
-
-  - name: Set enable_registration defaults
-    template:
-      src: "enable_registration.yml.j2"
-      dest: "{{ matrix_synapse_config_dir }}/enable_registration.yaml"
-    notify: restart matrix-synapse
-
-
+  
+  - include: configure.yml

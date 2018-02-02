@@ -1,8 +1,4 @@
 ---
-matrix_synapse_available_databases:
-  - "postgresql"
-  - "sqlite"
-
 matrix_synapse_database_name: matrix-synapse
 matrix_synapse_database_user: matrix-synapse
 matrix_synapse_database_password: S3CR3T!
