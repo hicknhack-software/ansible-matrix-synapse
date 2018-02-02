@@ -1,8 +1,6 @@
 ---
-# Change these before running ansible playbook
 matrix_synapse_report_stats: false # Send anonymus stats report to help improve matrix code, VISIT: matrix.org
-matrix_synapse_domain: matrix.hnhs.de
-# Change these only if you are sure of what's going on here.
+matrix_synapse_domain: matrix.youdomain.com # set the domain you use for matrix. This will be used as the server_name for matrix
 matrix_synapse_cache_factor: 0.2 # Read about it here: https://github.com/matrix-org/synapse#help-synapse-eats-all-my-ram
 matrix_synapse_enable_registration: false # Set to `true` if you plan to allow users to register themselves using riot.im like clients, Set `false` otherwise.r
-matrix_synapse_registration_shared_secret: "MYLITTELSECRET" # leave blank to 
+matrix_synapse_registration_shared_secret: "" # set this to a reasonyble default
