@@ -1,0 +1,15 @@
+= Ansibe Matrix Synapse
+
+== About
+
+This is a simple straight forward setup to get matrix-synapse running on Ubuntu Linux.
+Based upon the galaxy role of <TODO>
+
+== Configuration
+
+Include this role into your ansibel setup for a simpel matrix-synapse server.
+If you need a reverse proxy or anything fancy, use a more complex role or add stuff that you need.
+
+== Works on
+
+- Ubuntu Xenial (16.04)
