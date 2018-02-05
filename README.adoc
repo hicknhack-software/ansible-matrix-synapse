@@ -3,7 +3,7 @@
 == About
 
 This is a simple straight forward setup to get matrix-synapse running on Ubuntu Linux.
-Based upon the galaxy role of <TODO>
+Based upon the galaxy role of Ajay Tripathi (ajay39in@gmail.com)
 
 == Configuration
 
