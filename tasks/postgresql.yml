@@ -12,6 +12,8 @@
   postgresql_user:
     name: "{{ matrix_synapse_database_user }}"
     password: "{{ matrix_synapse_database_password }}"
+  become: true
+  become_user: postgres
 
 
 - name: Create Database Tables
@@ -22,3 +24,6 @@
     lc_ctype: C
     template: template0
     owner: "{{ matrix_synapse_database_user }}"
+  become: true
+  become_user: postgres
+
