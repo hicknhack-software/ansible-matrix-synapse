@@ -1,7 +1,7 @@
 ---
 matrix_synapse_database_name: matrix-synapse
 matrix_synapse_database_user: matrix-synapse
-matrix_synapse_database_password: matrix-synapse # change this to something reasonable!
+matrix_synapse_database_password: matrix-synapse-password # change this to something reasonable!
 
 matrix_synapse_config_dir: "/etc/matrix-synapse/conf.d"
 
