@@ -25,6 +25,6 @@
 
   - name: Configure server_name
     template:
-      src: sever_name.yml.j2
+      src: server_name.yml.j2
       dest: "{{ matrix_synapse_config_dir }}/server_name.yaml"
     notify: restart matrix-synapse
