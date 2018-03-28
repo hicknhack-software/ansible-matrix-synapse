@@ -18,8 +18,11 @@
 
   - name: Add an apt signing key
     apt_key:
-      url: https://matrix.org/packages/debian/repo-key.asc
+      #url: https://matrix.org/packages/debian/repo-key.asc
+      keyserver: pool.sks-keyservers.net
+      id: 47F0DF61
       state: present
+  
   - include: apt_upgrade.yml
 
   - name: Install requirements
