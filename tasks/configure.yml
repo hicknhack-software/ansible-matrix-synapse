@@ -29,4 +29,4 @@
       dest: "{{ matrix_synapse_config_dir }}/server_name.yaml"
     notify: restart matrix-synapse
 
-  - inlcude: setup_certificates.yml
+  - include: setup_certificates.yml
