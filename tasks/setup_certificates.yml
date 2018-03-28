@@ -11,20 +11,20 @@
 - name: Set Certificate
   copy:
     dest: "{{ matrix_synapse_dir }}/dummy_homeserver.tls.crt"
-    content: "{{ matrix_synapse_tsl_certificate }}"
+    content: "{{ matrix_synapse_tls_certificate }}"
     mode: "u=rw,g=r,o=r"
     owner: "{{ matrix_synapse_user }}"
     group: "{{ matrix_synapse_user_group }}"
-  when: matrix_synapse_tsl_certificate != none
+  when: matrix_synapse_tls_certificate != none
 
 - name: Set Certificate Private Key
   copy:
     dest: "{{ matrix_synapse_dir }}/dummy_homeserver.tls.key"
-    content: "{{ matrix_synapse_tsl_key }}"
+    content: "{{ matrix_synapse_tls_key }}"
     mode: "u=rw,g=r,o=r"
     owner: "{{ matrix_synapse_user }}"
     group: "{{ matrix_synapse_user_group }}"
-  when: matrix_synapse_tsl_key != none
+  when: matrix_synapse_tls_key != none
 
 - name: Set Certificate Diffie Hellman Key
   copy:

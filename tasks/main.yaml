@@ -8,20 +8,21 @@
       - deb https://matrix.org/packages/debian/ jessie main
       - deb-src https://matrix.org/packages/debian/ jessie main
 
-  - name: Add apt-key for jessie-backports
+  - name: Add apt-key for jessie-backports and matrix
     apt_key:
       keyserver: pgpkeys.mit.edu
       id: "{{ item }}"
     with_items:
       - 8B48AD6246925553
       - 7638D0442B90D010
+      - 47F0DF61
 
-  - name: Add an apt signing key
-    apt_key:
-      #url: https://matrix.org/packages/debian/repo-key.asc
-      keyserver: pool.sks-keyservers.net
-      id: 47F0DF61
-      state: present
+  # - name: Add an apt signing key
+  #   apt_key:
+  #     url: https://matrix.org/packages/debian/repo-key.asc
+  #     keyserver: pool.sks-keyservers.net
+  #     id: 47F0DF61 
+  #     state: present
   
   - include: apt_upgrade.yml
 

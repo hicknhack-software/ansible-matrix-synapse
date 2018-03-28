@@ -6,6 +6,6 @@ matrix_synapse_enable_registration: false # Set to `true` if you plan to allow u
 matrix_synapse_registration_shared_secret: "" # set this to a reasonyble default
 # The following vars should only be used if you try to re-generate a previous setup. Leaving them unset will cause synapse to generate them automatically
 matrix_synapse_signing_key:
-matrix_synapse_tsl_certificate:
-matrix_synapse_tsl_key:
+matrix_synapse_tls_certificate:
+matrix_synapse_tls_key:
 matrix_synapse_tls_dh:
