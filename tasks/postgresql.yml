@@ -8,13 +8,27 @@
     - libpq-dev
     - python-psycopg2
 
+- name: Retrieve Postgresql Version
+  shell: psql --version | grep -o -E "[0-9]{1,}\.[0-9]{1,}"
+  register: psql_version_output
+
+- name: Determine Postgresql Config Path
+  set_fact:
+    psql_config_path: "/etc/postgresql/{{ psql_version_output.stdout_lines[0] }}/main"
+
+- name: Configure Host Based Access
+  template:
+    src: pg_hba.conf.j2
+    dest: "{{ psql_config_path }}/dummy_pg_hba.conf"
+  notify: restart postgresql
+  when: matrix_synapse_psql_trust_local_connections
+
 - name: Create Database User Role
   postgresql_user:
     name: "{{ matrix_synapse_database_user }}"
     password: "{{ matrix_synapse_database_password }}"
   become: true
   become_user: postgres
-
 
 - name: Create Database Tables
   postgresql_db:

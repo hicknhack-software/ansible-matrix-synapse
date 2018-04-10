@@ -9,3 +9,5 @@ matrix_synapse_signing_key:
 matrix_synapse_tls_certificate:
 matrix_synapse_tls_key:
 matrix_synapse_tls_dh:
+# Utilitarian vars
+matrix_synapse_psql_trust_local_connections: false # if true, local psql connections are set to trust. Refer to https://www.postgresql.org/docs/9.6/static/auth-methods.html#AUTH-TRUST

@@ -8,3 +8,4 @@ matrix_synapse_database_password: matrix-synapse-password # change this to somet
 matrix_synapse_dir: "/etc/matrix-synapse"
 matrix_synapse_config_dir: "{{ matrix_synapse_dir }}/conf.d"
 
+
