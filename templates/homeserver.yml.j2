@@ -77,7 +77,7 @@ pid_file: /etc/matrix-synapse/homeserver.pid
 # cpu_affinity: 0xFFFFFFFF
 
 # Whether to serve a web client from the HTTP/HTTPS root resource.
-web_client: True
+web_client: False
 
 # The root directory to server for the above web client.
 # If left undefined, synapse will serve the matrix-angular-sdk web client.
@@ -188,12 +188,14 @@ listeners:
 
 # Database configuration
 database:
-  # The database engine name
-  name: "sqlite3"
-  # Arguments to pass to the engine
-  args:
-    # Path to the database
-    database: "/etc/matrix-synapse/homeserver.db"
+    name: psycopg2
+    args:
+        user: {{ matrix_synapse_database_user }}
+        password: {{ matrix_synapse_database_password }}
+        database: {{ matrix_synapse_database_name }}
+        host: localhost
+        cp_min: 5
+        cp_max: 10
 
 # Number of events to cache in memory.
 event_cache_size: "10K"
