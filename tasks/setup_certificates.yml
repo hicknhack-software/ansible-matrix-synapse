@@ -1,7 +1,7 @@
 ---
 - name: Set Signing Key
   copy:
-    dest: "{{ matrix_synapse_dir }}/dummy_homeserver.signing.key"
+    dest: "{{ matrix_synapse_dir }}/homeserver.signing.key"
     content: "{{ matrix_synapse_signing_key }}"
     mode: "u=rw,g=r,o=r"
     owner: "{{ matrix_synapse_user }}"
@@ -10,7 +10,7 @@
 
 - name: Set Certificate
   copy:
-    dest: "{{ matrix_synapse_dir }}/dummy_homeserver.tls.crt"
+    dest: "{{ matrix_synapse_dir }}/homeserver.tls.crt"
     content: "{{ matrix_synapse_tls_certificate }}"
     mode: "u=rw,g=r,o=r"
     owner: "{{ matrix_synapse_user }}"
@@ -19,7 +19,7 @@
 
 - name: Set Certificate Private Key
   copy:
-    dest: "{{ matrix_synapse_dir }}/dummy_homeserver.tls.key"
+    dest: "{{ matrix_synapse_dir }}/homeserver.tls.key"
     content: "{{ matrix_synapse_tls_key }}"
     mode: "u=rw,g=r,o=r"
     owner: "{{ matrix_synapse_user }}"
@@ -28,7 +28,7 @@
 
 - name: Set Certificate Diffie Hellman Key
   copy:
-    dest: "{{ matrix_synapse_dir }}/dummy_homeserver.tls.dh"
+    dest: "{{ matrix_synapse_dir }}/homeserver.tls.dh"
     content: "{{ matrix_synapse_tls_dh }}"
     mode: "u=rw,g=r,o=r"
     owner: "{{ matrix_synapse_user }}"
