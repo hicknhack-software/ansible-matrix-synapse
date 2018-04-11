@@ -20,6 +20,9 @@
   template:
     src: pg_hba.conf.j2
     dest: "{{ psql_config_path }}/dummy_pg_hba.conf"
+    user: "{{ matrix_synapse_psql_user }}"
+    group: "{{ matrix_synapse_psql_group }}"
+    mode: 0640
   notify: restart postgresql
   when: matrix_synapse_psql_trust_local_connections
 
@@ -28,7 +31,7 @@
     name: "{{ matrix_synapse_database_user }}"
     password: "{{ matrix_synapse_database_password }}"
   become: true
-  become_user: postgres
+  become_user: "{{ matrix_synapse_psql_user }}"
 
 - name: Create Database Tables
   postgresql_db:
@@ -39,5 +42,5 @@
     template: template0
     owner: "{{ matrix_synapse_database_user }}"
   become: true
-  become_user: postgres
+  become_user: "{{ matrix_synapse_psql_user }}"
 
