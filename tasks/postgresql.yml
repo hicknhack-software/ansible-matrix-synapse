@@ -20,7 +20,7 @@
   template:
     src: pg_hba.conf.j2
     dest: "{{ psql_config_path }}/dummy_pg_hba.conf"
-    user: "{{ matrix_synapse_psql_user }}"
+    owner: "{{ matrix_synapse_psql_user }}"
     group: "{{ matrix_synapse_psql_group }}"
     mode: 0640
   notify: restart postgresql
