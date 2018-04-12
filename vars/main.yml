@@ -1,17 +1,21 @@
 ---
+#user info
 matrix_synapse_user: matrix-synapse
 matrix_synapse_user_group: nogroup
-matrix_synapse_database_name: matrix-synapse
-matrix_synapse_database_user: matrix-synapse
-matrix_synapse_database_password: matrix-synapse-password # change this to something reasonable!
 
-matrix_synapse_media_store_path: "/var/lib/matrix-synapse/media"
-matrix_synapse_uploads_path: "/var/lib/matrix-synapse/uploads"
-
+#folders
 matrix_synapse_dir: "/etc/matrix-synapse"
 matrix_synapse_config_dir: "{{ matrix_synapse_dir }}/conf.d"
 matrix_synapse_config: "{{ matrix_synapse_dir }}/homeserver.yaml"
+matrix_synapse_media_store_path: "/var/lib/matrix-synapse/media"
+matrix_synapse_uploads_path: "/var/lib/matrix-synapse/uploads"
+
+#postgres
 matrix_synapse_psql_user: postgres
 matrix_synapse_psql_group: postgres
 
+#database
+matrix_synapse_database_name: matrix-synapse
+matrix_synapse_database_user: matrix-synapse
+matrix_synapse_database_password: matrix-synapse-password # change this to something reasonable!
 
