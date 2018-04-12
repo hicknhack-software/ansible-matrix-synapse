@@ -14,8 +14,19 @@
 
   - name: Configure Homeserver
     template:
-      src: homeserver.yml.j2
+      src: homeserver.yaml.j2
       dest: "{{ matrix_synapse_config }}"
       owner: "{{ matrix_synapse_user }}"
       group: "{{ matrix_synapse_user_group }}"
     notify: restart matrix-synapse
+
+  - name: Additianal Homeserver Configuration
+    template:
+      src: "{{ item }}.j2"
+      dest: "{{ matrix_synapse_config_dir }}/{{ item }}"
+      owner: "{{ matrix_synapse_user }}"
+      group: "{{ matrix_synapse_user_group }}"
+    notify: restart matrix-synapse
+    with_items:
+      - server_name.yaml
+      - report_stats.yaml
