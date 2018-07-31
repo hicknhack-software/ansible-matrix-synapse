@@ -1,13 +1,20 @@
 ---
-matrix_synapse_report_stats: false # Send anonymus stats report to help improve matrix code, VISIT: matrix.org
-matrix_synapse_domain: matrix.youdomain.com # set the domain you use for matrix. This will be used as the server_name for matrix
-matrix_synapse_cache_factor: 0.2 # Read about it here: https://github.com/matrix-org/synapse#help-synapse-eats-all-my-ram
-matrix_synapse_enable_registration: false # Set to `true` if you plan to allow users to register themselves using riot.im like clients, Set `false` otherwise.r
-matrix_synapse_registration_shared_secret: "" # set this to a reasonyble default
+# Send anonymus stats report to help improve matrix code, VISIT: matrix.org
+matrix_synapse_report_stats: false
+# set the domain you use for matrix. This will be used as the server_name for matrix
+matrix_synapse_domain: matrix.youdomain.com
+# Read about it here: https://github.com/matrix-org/synapse#help-synapse-eats-all-my-ram
+matrix_synapse_cache_factor: 0.2
+# Set to `true` if you plan to allow users to register themselves using riot.im like clients, Set `false` otherwise.r
+matrix_synapse_enable_registration: false
+# set this to a reasonyble default
+matrix_synapse_registration_shared_secret: ""
+# The largest allowed upload size in bytes
+matrix_synapse_max_upload_size: "10M"
 # The following vars should only be used if you try to re-generate a previous setup. Leaving them unset will cause synapse to generate them automatically
 matrix_synapse_signing_key:
 matrix_synapse_tls_certificate:
 matrix_synapse_tls_key:
 matrix_synapse_tls_dh:
-# Utilitarian vars
-matrix_synapse_psql_trust_local_connections: false # if true, local psql connections are set to trust. Refer to https://www.postgresql.org/docs/9.6/static/auth-methods.html#AUTH-TRUST
+# if true, local psql connections are set to trust. Refer to https://www.postgresql.org/docs/9.6/static/auth-methods.html#AUTH-TRUST
+matrix_synapse_psql_trust_local_connections: false
