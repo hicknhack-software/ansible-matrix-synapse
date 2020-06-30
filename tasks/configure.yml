@@ -1,6 +1,6 @@
 ---
   - include: setup_certificates.yml
-  
+
   - name: Ensure Matrix Folders
     file:
       path: "{{ item }}"

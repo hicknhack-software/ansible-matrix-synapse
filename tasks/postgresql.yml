@@ -1,12 +1,11 @@
 ---
 - name: Install PostgreSQL
   apt:
-    name: "{{ item }}"
+    name:
+      - postgresql
+      - libpq-dev
+      - python-psycopg2
     state: present
-  with_items:
-    - postgresql
-    - libpq-dev
-    - python-psycopg2
 
 - name: Retrieve Postgresql Version
   shell: psql --version | grep -o -E "[0-9]{1,}\.[0-9]{1,}"
@@ -43,4 +42,3 @@
     owner: "{{ matrix_synapse_database_user }}"
   become: true
   become_user: "{{ matrix_synapse_psql_user }}"
-
