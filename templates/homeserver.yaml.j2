@@ -212,7 +212,7 @@ listeners:
     bind_addresses: ['::', '0.0.0.0']
 
     resources:
-      - names: [client, webclient]
+      - names: [client]
         compress: true
       - names: [client, federation]
         compress: false
@@ -230,7 +230,7 @@ listeners:
     bind_addresses: ['::1', '127.0.0.1']
 
     resources:
-      - names: [client, webclient]
+      - names: [client]
         compress: true
       - names: [client, federation]
         compress: false
@@ -1377,7 +1377,7 @@ trusted_key_servers:
 # Uncomment the following to disable the warning that is emitted when the
 # trusted_key_servers include 'matrix.org'. See above.
 #
-#suppress_key_server_warning: true
+suppress_key_server_warning: true
 
 # The signing keys to use when acting as a trusted key server. If not specified
 # defaults to the server signing key.
