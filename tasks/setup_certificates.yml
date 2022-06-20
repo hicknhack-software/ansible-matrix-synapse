@@ -1,4 +1,3 @@
----
 - name: Set Signing Key
   copy:
     dest: "{{ matrix_synapse_dir }}/homeserver.signing.key"

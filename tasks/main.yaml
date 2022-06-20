@@ -4,14 +4,30 @@
       repo: "{{ item }}"
       state: present
     with_items:
-      - deb https://matrix.org/packages/debian/ xenial main
-      - deb-src https://matrix.org/packages/debian/ xenial main
+      - deb https://packages.matrix.org/debian/ bionic main
+      #- deb https://matrix.org/packages/debian/ xenial main
+      #- deb-src https://matrix.org/packages/debian/ xenial main
 
   - name: Add an apt signing key
     apt_key:
-      url: https://matrix.org/packages/debian/matrix-org-archive-keyring.asc
-      id: DE2DA058
+      url: https://packages.matrix.org/debian/matrix-org-archive-keyring.gpg
+      #id: DE2DA058
       state: present
+
+  - name: Install prequisites
+    apt:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - build-essential
+      - python3-dev
+      - libffi-dev
+      - python3-pip
+      - python3-setuptools
+      - sqlite3
+      - libssl-dev virtualenv
+      - libjpeg-dev
+      - libxslt1-dev
 
   - include: apt_upgrade.yml
 
