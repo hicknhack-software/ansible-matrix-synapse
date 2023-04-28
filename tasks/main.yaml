@@ -1,12 +1,12 @@
+- name: Add an apt signing key
+  apt_key:
+    id: F473DD4473365DE1
+    url: https://packages.matrix.org/debian/matrix-org-archive-keyring.gpg
+    state: present
+
 - name: Add Matrix repositories
   apt_repository:
     repo:  "deb https://packages.matrix.org/debian/ bionic main"
-    state: present
-
-- name: Add an apt signing key
-  apt_key:
-    url: https://packages.matrix.org/debian/matrix-org-archive-keyring.gpg
-    #id: DE2DA058
     state: present
 
 - name: Install prequisites
@@ -20,9 +20,11 @@
     - python3-pip
     - python3-setuptools
     - sqlite3
-    - libssl-dev virtualenv
+    - libssl-dev
+    - virtualenv
     - libjpeg-dev
     - libxslt1-dev
+    - libicu-dev
 
 - include: apt_upgrade.yml
 
@@ -30,14 +32,6 @@
   apt:
     name: matrix-synapse-py3
     state: present
-  notify: restart matrix-synapse
-
-- name: Set Synapse Cache Factor
-  lineinfile:
-    path: /etc/default/matrix-synapse
-    regexp: SYNAPSE_CACHE_FACTOR
-    state: present
-    line: "SYNAPSE_CACHE_FACTOR={{ matrix_synapse_cache_factor }}"
   notify: restart matrix-synapse
 
 - include: postgresql.yml

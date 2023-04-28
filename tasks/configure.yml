@@ -1,5 +1,3 @@
-- include: setup_certificates.yml
-
 - name: Ensure Matrix Folders
   file:
     path: "{{ item }}"
@@ -7,14 +5,21 @@
     owner: "{{ matrix_synapse_user }}"
     group: "{{ matrix_synapse_user_group }}"
   with_items:
-    - "{{ matrix_synapse_config_dir }}"
     - "{{ matrix_synapse_media_store_path }}"
     - "{{ matrix_synapse_uploads_path }}"
 
-- name: Configure Homeserver
+- name: Replace homeserver.yaml
   template:
-    src: homeserver_overrides.yaml.j2
-    dest: "{{ matrix_synapse_config_dir }}/homserver_overrides.yaml"
-    owner: "{{ matrix_synapse_user }}"
-    group: "{{ matrix_synapse_user_group }}"
+    src: homeserver.yaml.j2
+    dest: "{{ matrix_synapse_config }}"
+    owner: "root"
+    group: "root"
+  notify: restart matrix-synapse
+
+- name: Configure Homeserver Name
+  template:
+    src: server_name.yaml.j2
+    dest: "{{ matrix_synapse_config_dir }}/server_name.yaml"
+    owner: "root"
+    group: "root"
   notify: restart matrix-synapse

@@ -2,11 +2,7 @@
 # Send anonymus stats report to help improve matrix code, VISIT: matrix.org
 matrix_synapse_report_stats: false
 # set the domain you use for matrix. This will be used as the server_name for matrix
-matrix_synapse_domain: matrix.youdomain.com
-# Read about it here: https://github.com/matrix-org/synapse#help-synapse-eats-all-my-ram
-matrix_synapse_cache_factor: 0.2
-# Set to `true` if you plan to allow users to register themselves using riot.im like clients, Set `false` otherwise.r
-matrix_synapse_enable_registration: false
+matrix_synapse_domain: matrix.yourdomain.com
 # set this to a reasonyble default
 matrix_synapse_registration_shared_secret: ""
 # The largest allowed upload size in bytes
