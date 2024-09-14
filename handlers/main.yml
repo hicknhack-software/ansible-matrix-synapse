@@ -1,6 +1,10 @@
 ---
-  - name: restart matrix-synapse
-    service: name=matrix-synapse state=restarted
-  
-  - name: restart postgresql
-    service: name=postgresql state=restarted
+- name: Restart matrix-synapse
+  ansible.builtin.service:
+    name: matrix-synapse
+    state: restarted
+
+- name: Restart postgresql
+  ansible.builtin.service:
+    name: postgresql
+    state: restarted

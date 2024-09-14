@@ -1,25 +1,40 @@
 - name: Ensure Matrix Folders
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     owner: "{{ matrix_synapse_user }}"
     group: "{{ matrix_synapse_user_group }}"
-  with_items:
+    mode: "755"
+  loop:
     - "{{ matrix_synapse_media_store_path }}"
-    - "{{ matrix_synapse_uploads_path }}"
 
-- name: Replace homeserver.yaml
-  template:
-    src: homeserver.yaml.j2
-    dest: "{{ matrix_synapse_config }}"
+- name: Replace Configurations
+  ansible.builtin.template:
+    src: "{{ item['src'] }}"
+    dest: "{{ item['dest'] }}"
     owner: "root"
     group: "root"
-  notify: restart matrix-synapse
+    mode: "644"
+  loop:
+    - src: homeserver.yaml.j2
+      dest: "{{ matrix_synapse_config }}"
+    - src: server_name.yaml.j2
+      dest: "{{ matrix_synapse_config_dir }}/server_name.yaml"
+    - src: report_stats.yaml.j2
+      dest: "{{ matrix_synapse_config_dir }}/report_stats.yaml"
+  notify: Restart matrix-synapse
 
-- name: Configure Homeserver Name
-  template:
-    src: server_name.yaml.j2
-    dest: "{{ matrix_synapse_config_dir }}/server_name.yaml"
-    owner: "root"
-    group: "root"
-  notify: restart matrix-synapse
+- name: Store TLS Certificates
+  ansible.builtin.file:
+    path: "{{ item['path'] }}"
+    state: file
+    owner: "{{ matrix_synapse_user }}"
+    group: "{{ matrix_synapse_user_group }}"
+    mode: "600"
+  loop:
+    - path: "/etc/matrix-synapse/{{ matrix_synapse_domain }}.tls.crt"
+      content: "{{ matrix_synapse_tls_certificate }}"
+    - path: "/etc/matrix-synapse/{{ matrix_synapse_domain }}.tls.key"
+      content: "{{ matrix_synapse_tls_key }}"
+  notify: Restart matrix-synapse
+  when: matrix_synapse_tls_certificate != none and matrix_synapse_tls_key != none

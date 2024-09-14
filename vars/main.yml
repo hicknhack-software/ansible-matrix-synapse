@@ -1,19 +1,18 @@
 ---
-#user info
+# User info
 matrix_synapse_user: matrix-synapse
 matrix_synapse_user_group: nogroup
 
-#folders
+# Folders
 matrix_synapse_dir: "/etc/matrix-synapse"
 matrix_synapse_config_dir: "{{ matrix_synapse_dir }}/conf.d"
 matrix_synapse_config: "{{ matrix_synapse_dir }}/homeserver.yaml"
 
-#postgres
+# Postgres Server
 matrix_synapse_psql_user: postgres
 matrix_synapse_psql_group: postgres
 
-#database
+# Database
 matrix_synapse_database_name: matrix-synapse
 matrix_synapse_database_user: matrix-synapse
 matrix_synapse_database_password: matrix-synapse-password # change this to something reasonable!
-

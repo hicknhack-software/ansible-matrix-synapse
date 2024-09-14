@@ -1,0 +1,10 @@
+---
+- name: Install Matrix Synapse
+  hosts: matrix
+  become: true
+  vars:
+    matrix_synapse_registration_shared_secret: "xxxxx"
+    matrix_synapse_domain: "localhost:8008"
+
+  roles:
+    - role: hicknhack-software.matrix-synapse

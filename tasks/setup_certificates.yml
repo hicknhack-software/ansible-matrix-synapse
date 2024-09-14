@@ -1,5 +1,5 @@
 - name: Set Signing Key
-  copy:
+  ansible.builtin.copy:
     dest: "{{ matrix_synapse_dir }}/homeserver.signing.key"
     content: "{{ matrix_synapse_signing_key }}"
     mode: "u=rw,g=r,o=r"

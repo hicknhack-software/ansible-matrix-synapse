@@ -1,32 +1,46 @@
 - name: Install PostgreSQL
-  apt:
+  ansible.builtin.apt:
+    state: present
     name:
       - postgresql
-      - libpq-dev
-      - python-psycopg2
+      - python3-psycopg2
       - libpq5
-    state: present
+  notify: Restart postgresql
 
 - name: Retrieve Postgresql Version
-  shell: psql --version | grep -o -E "[0-9]{1,}" # pg 10 uses only the mayor version
+  ansible.builtin.shell:
+    cmd: set -o pipefail && psql --version | grep -o -E "[0-9]{1,}" # pg 10 uses only the mayor version
+    executable: /bin/bash
+  changed_when: false
   register: psql_version_output
 
 - name: Determine Postgresql Config Path
-  set_fact:
+  ansible.builtin.set_fact:
     psql_config_path: "/etc/postgresql/{{ psql_version_output.stdout_lines[0] }}/main"
 
 - name: Configure Host Based Access
-  template:
+  ansible.builtin.template:
     src: pg_hba.conf.j2
     dest: "{{ psql_config_path }}/pg_hba.conf"
     owner: "{{ matrix_synapse_psql_user }}"
     group: "{{ matrix_synapse_psql_group }}"
-    mode: 0640
-  notify: restart postgresql
+    mode: "640"
+  notify: Restart postgresql
   when: matrix_synapse_psql_trust_local_connections
 
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Ensure Safe become
+  ansible.builtin.file:
+    dest: "/var/lib/postgresql/.ansible/tmp"
+    state: directory
+    mode: "700"
+    owner: "{{ matrix_synapse_psql_user }}"
+    group: "{{ matrix_synapse_psql_group }}"
+
 - name: Create Database User Role
-  postgresql_user:
+  community.postgresql.postgresql_user:
     name: "{{ matrix_synapse_database_user }}"
     password: "{{ matrix_synapse_database_password }}"
     encrypted: true
@@ -34,7 +48,7 @@
   become_user: "{{ matrix_synapse_psql_user }}"
 
 - name: Create Database Tables
-  postgresql_db:
+  community.postgresql.postgresql_db:
     name: "{{ matrix_synapse_database_name }}"
     encoding: UTF-8
     lc_collate: C

@@ -1,0 +1,12 @@
+---
+galaxy_info:
+  author: ""
+  role_name: "matrix_synapse"
+  namespace: "hicknhack-software"
+  description: "Setup a Matrix Synapse Server"
+  company: HicknHack Software Gmbh
+  license: GPL
+  min_ansible_version: "2.10"
+  galaxy_tags:
+    - system
+dependencies: []

@@ -1,0 +1,10 @@
+---
+services:
+  synchronization_vm:
+    image: ghcr.io/hicknhack-software/ansible-target:jammy
+
+  sender_vm:
+    image: ghcr.io/hicknhack-software/ansible-target:jammy
+
+  receiver_vm:
+    image: ghcr.io/hicknhack-software/ansible-target:jammy

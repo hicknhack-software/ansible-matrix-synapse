@@ -12,4 +12,4 @@ If you need a reverse proxy or anything fancy, use a more complex role or add st
 
 == Works on
 
-- Ubuntu Xenial (16.04)
+- Ubuntu Jammy (22.04)
