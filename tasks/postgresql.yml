@@ -39,21 +39,23 @@
     owner: "{{ matrix_synapse_psql_user }}"
     group: "{{ matrix_synapse_psql_group }}"
 
-- name: Create Database User Role
-  community.postgresql.postgresql_user:
-    name: "{{ matrix_synapse_database_user }}"
-    password: "{{ matrix_synapse_database_password }}"
-    encrypted: true
+- name: Prepare Database
   become: true
   become_user: "{{ matrix_synapse_psql_user }}"
+  block:
+    - name: Create Database User Role
+      community.postgresql.postgresql_user:
+        name: "{{ matrix_synapse_database_user }}"
+        password: "{{ matrix_synapse_database_password }}"
+        encrypted: true
+      register: create_user_result
 
-- name: Create Database Tables
-  community.postgresql.postgresql_db:
-    name: "{{ matrix_synapse_database_name }}"
-    encoding: UTF-8
-    lc_collate: C
-    lc_ctype: C
-    template: template0
-    owner: "{{ matrix_synapse_database_user }}"
-  become: true
-  become_user: "{{ matrix_synapse_psql_user }}"
+    - name: Create Database Tables
+      community.postgresql.postgresql_db:
+        name: "{{ matrix_synapse_database_name }}"
+        encoding: UTF-8
+        lc_collate: C
+        lc_ctype: C
+        template: template0
+        owner: "{{ matrix_synapse_database_user }}"
+      when: create_user_result.changed and true
